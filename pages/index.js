@@ -37,3 +37,4 @@ export default function Home() {
 }
 
 //1번 pr
+//2번, 현재 pr은 open, 현상태에서 git push
