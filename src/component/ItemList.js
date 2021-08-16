@@ -12,11 +12,11 @@ export default function ItemList({ list }) {
               <Link href={`/view/${item.id}`}>
                 <a>
                   <div className={styles.wrap}>
-                    <img
+                    {/* <img
                       src={item.image_link}
                       alt={item.name}
                       className={styles.img_item}
-                    />
+                    /> */}
                     <strong className={styles.tit_item}>{item.name}</strong>
                     <span className={styles.txt_info}>
                       {item.category} {item.product_type}
