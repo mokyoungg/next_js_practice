@@ -8,30 +8,50 @@ import { Header, Divider } from "semantic-ui-react";
 
 export default function Home() {
   const [list, setList] = useState([]);
-  const API_URL =
-    "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline";
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = () => {
+  // const API_URL =
+  //   "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline";
+
+  //브라우저 환경
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  const getData = () => {
     axios.get(API_URL).then((res) => {
-      console.log("res", res);
+      console.log("res :", res.data);
       setList(res.data);
+      setIsLoading(false);
     });
   };
 
   useEffect(() => {
-    fetchData();
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // 정적파일로 사용해도 괜찮음
   return (
     <div>
       <Head>
         <title>HOME | 코딩앙마</title>
       </Head>
-      <Header as="h3" style={{ paddingTop: 40 }}>
-        베스트 상품
-      </Header>
-      <Divider />
-      <ItemList list={list.slice(0, 9)} />
+      {isLoading && (
+        <div style={{ padding: "300px 0" }}>
+          {/* <Loader inline="centerd" active>
+            Loading
+          </Loader> */}
+          <p>loading</p>
+        </div>
+      )}
+      {!isLoading && (
+        <>
+          <Header as="h3" style={{ paddingTop: 40 }}>
+            베스트 상품
+          </Header>
+          <Divider />
+          {list && <ItemList list={list.slice(0, 9)} />}
+        </>
+      )}
     </div>
   );
 }

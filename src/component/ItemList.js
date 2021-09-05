@@ -1,6 +1,7 @@
 import { Grid } from "semantic-ui-react";
 import styles from "./ItemList.module.css";
 import Link from "next/link";
+import Image from "next/dist/client/image";
 
 export default function ItemList({ list }) {
   return (
@@ -12,6 +13,11 @@ export default function ItemList({ list }) {
               <Link href={`/view/${item.id}`}>
                 <a>
                   <div className={styles.wrap}>
+                    {/* <Image
+                      src={item.image_link}
+                      alt={item.name}
+                      className={styles.img_item}
+                    /> */}
                     {/* <img
                       src={item.image_link}
                       alt={item.name}
